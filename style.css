@@ -1,0 +1,17 @@
+*{box-sizing:border-box;font-family:Arial, Helvetica, sans-serif}
+html,body{height:100%;margin:0;background:#000;color:#fff}
+#game-wrap{display:flex;align-items:center;justify-content:center;height:100vh}
+canvas{background:#000;border:6px solid #c8c8c8;display:block}
+.overlay{position:fixed;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(0,0,0,0.75)}
+.hidden{display:none}
+.btn-row{display:flex;gap:12px}
+button{padding:12px 20px;border-radius:6px;border:2px solid #ccc;background:#111;color:#fff;cursor:pointer}
+button:hover{background:#222}
+#hud{position:fixed;top:12px;left:12px}
+#score{font-size:20px;background:rgba(0,0,0,0.6);padding:8px 12px;border-radius:8px;color:#fff;font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,0.6)}
+#paused{font-size:40px;position:fixed;left:50%;top:48%;transform:translate(-50%,-50%);color:#fff}
+#menu-title{color:#55ff64;font-size:64px;margin:0}
+#controls-text{color:#999}
+#game-over h2{color:#ff3232;font-size:48px;margin:0}
+#restart-prompt{color:#fff}
+@media (max-width:900px){canvas{width:90vw;height:90vw}}

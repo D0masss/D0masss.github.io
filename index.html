@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Classic Snake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu" class="overlay">
+    <h1 id="menu-title">SNAKE</h1>
+    <div id="lang-buttons" class="btn-row">
+      <button data-lang="en">English</button>
+      <button data-lang="lt">Lietuvių</button>
+    </div>
+    <div class="btn-row">
+      <button id="play-btn">PLAY</button>
+      <button id="quit-btn">QUIT</button>
+    </div>
+    <p id="controls-text">Controls: Arrow Keys or WASD</p>
+  </div>
+
+  <div id="game-wrap">
+    <canvas id="gameCanvas" width="800" height="800"></canvas>
+    <div id="hud">
+      <div id="score">Score: 0</div>
+      <div id="paused" class="hidden">PAUSED</div>
+    </div>
+  </div>
+
+  <div id="game-over" class="overlay hidden">
+    <h2 id="game-over-text">GAME OVER!</h2>
+    <p id="restart-prompt">Press R to Restart or Q to Quit</p>
+    <button id="restart-btn">Restart</button>
+    <button id="quit-to-menu-btn">Quit to Menu</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
