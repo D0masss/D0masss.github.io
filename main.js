@@ -50,7 +50,7 @@ class Localization {
   constructor() { this.current = 'en'; }
   t(key, params = {}){
     const text = TRANSLATIONS[this.current][key] || key;
-    return text.replace(/\{(\w+)\}/g, (_, k) => params[k] ?? '');
+    return text.replace(/\{(\w+)}/g, (_, k) => params[k] ?? '');
   }
   set(lang){ if(TRANSLATIONS[lang]) this.current = lang; }
 }
@@ -128,7 +128,6 @@ class Snake {
     this.segments.push(new Block([start_x - SQUARE_BLOCK_SIZE, start_y], COLORS.snake));
     this.tailLastPos = this.segments[this.segments.length-1].pos.slice();
   }
-  head(){ return this.segments[0]; }
   setDir(newDir){ const opposites = {right:'left', left:'right', up:'down', down:'up'}; if(opposites[this.direction]!==newDir) this.direction=newDir; }
   move(){
     const head = this.segments[0];
@@ -214,13 +213,12 @@ window.addEventListener('keydown', (e)=>{
     if(e.key.toLowerCase()==='q'){ quitToMenu(); }
     return;
   }
-  if(e.key === 'Escape'){ paused = !paused; }
-  if(e.key === 'Escape'){ render(); }
+  if(e.key === 'Escape'){ paused = !paused; render(); e.preventDefault(); }
   if(!paused){
-    if(e.key === 'ArrowUp' || e.key.toLowerCase()==='w') snake.setDir('up');
-    if(e.key === 'ArrowDown' || e.key.toLowerCase()==='s') snake.setDir('down');
-    if(e.key === 'ArrowLeft' || e.key.toLowerCase()==='a') snake.setDir('left');
-    if(e.key === 'ArrowRight' || e.key.toLowerCase()==='d') snake.setDir('right');
+    if(e.key === 'ArrowUp' || e.key.toLowerCase()==='w') { snake.setDir('up'); e.preventDefault(); }
+    if(e.key === 'ArrowDown' || e.key.toLowerCase()==='s') { snake.setDir('down'); e.preventDefault(); }
+    if(e.key === 'ArrowLeft' || e.key.toLowerCase()==='a') { snake.setDir('left'); e.preventDefault(); }
+    if(e.key === 'ArrowRight' || e.key.toLowerCase()==='d') { snake.setDir('right'); e.preventDefault(); }
   }
   if(e.key.toLowerCase()==='r'){ startGame(); }
   if(e.key.toLowerCase()==='q'){ quitToMenu(); }
@@ -231,11 +229,13 @@ document.getElementById('quit-btn').addEventListener('click', ()=>{ window.close
 
 document.querySelectorAll('#lang-buttons button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    const lang = btn.getAttribute('data-lang'); loc.set(lang); updateLocaleTexts();
+    loc.set(btn.getAttribute('data-lang'));
+    updateLocaleTexts();
   });
 });
 
 function updateLocaleTexts(){
+  document.documentElement.lang = loc.current;
   document.title = loc.t('game_title');
   menuTitle.textContent = loc.t('menu_title');
   document.getElementById('play-btn').textContent = loc.t('play_button');
